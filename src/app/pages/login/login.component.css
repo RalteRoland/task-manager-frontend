@@ -1,7 +1,7 @@
 /* Root wrapper with 60/40 grid */
 .login-wrapper {
   display: grid;
-  grid-template-columns: 3fr 2fr; /* 60/40 split */
+  grid-template-columns: 4fr 2fr; /* 80/20 split */
   height: 100vh;
   font-family: Arial, sans-serif;
 }
@@ -21,8 +21,62 @@
   color: white;
   text-align: left;
   font-size: 4rem;
+  font-weight: bold;
   margin-bottom: 0.5rem;
 }
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+  border-radius: 15px;
+  max-width: 700px;
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 400px; /* consistent fixed height */
+}
+
+.carousel-item {
+  position: relative;
+  height: 100%; /* make sure it matches the fixed height */
+
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* cover the area without distortion */
+  display: block;
+}
+
+
+/* Indicators - styled and consistent */
+.carousel-indicators button {
+  background-color: black;
+  width: 28px;
+  height: 8px;
+  border-radius: 999px;
+  margin: 6px;
+  opacity: 0.3;
+  border: none;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: scale(0.9); /* slightly smaller for inactive */
+}
+
+.carousel-indicators .active {
+  opacity: 0.8;
+  transform: scale(1.2); /* slightly enlarges active without affecting layout */
+}
+
+
+
+
 
 /* Right side */
 .right-panel {
@@ -35,15 +89,21 @@
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05);
 }
 
+
 .login-form {
   width: 100%;
   max-width: 320px;
   text-align: center;
 }
 
+.login-form h2{
+  font-weight: 100;
+}
+
 .login-form h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
+  font-weight: 150;
 }
 
 .login-form form {
@@ -71,7 +131,7 @@ button[type="submit"] {
 
 .mobile-btn {
   padding: 0.75rem;
-  border: 1px solid #333;
+  border: 2px solid #333;
   background-color: white;
   border-radius: 6px;
   cursor: pointer;
