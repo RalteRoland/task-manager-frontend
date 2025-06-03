@@ -8,32 +8,44 @@
 
 /* Left side */
 .left-panel {
-  background: url('/assets/login-background-image.jpg') no-repeat center center;
-  background-size: cover;
+  position: relative;       /* establish positioning context */
   display: flex;
-  justify-content: left;
-  align-items: flex-start;
+  justify-content: center;  /* center carousel horizontally */
+  align-items: center;      /* center carousel vertically */
   padding: 2rem;
   height: 100vh;
+  background: url('/assets/login-background-image.jpg') no-repeat center center;
+  background-size: cover;
 }
 
-.welcome-box h1 {
-  color: white;
+/* Place the welcome-box at top-left */
+.welcome-box {
+  position: absolute;       /* remove it from flex flow */
+  top: 2rem;                /* distance from top */
+  left: 2rem;               /* distance from left */
   text-align: left;
-  font-size: 4rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  margin-left: 40%;
-  margin-top: 5%;
+  width: auto;              /* shrink to content */
+  z-index: 10;              /* above carousel */
 }
+
+/* Welcome logo styling */
+.welcome-logo {
+  height: 60px;
+  display: block;
+  margin-top: 10px;
+  margin-left: 25%;
+}
+
+
+
+
 
 .carousel-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15%;
   border-radius: 15px;
-  max-width: 700px;
+  max-width: 750px;
   width: 100%;
   background: transparent;
   overflow: hidden;
@@ -94,6 +106,7 @@
 }
 
 .login-form h3 {
+  letter-spacing: 3px;
   font-weight: 100;
   font-size: 1.8rem;
 }
@@ -203,12 +216,12 @@ button[type="submit"]:hover {
   color: #6c6c6c;
 }
 
-.powered strong {
-  font-size: 1.8rem; /* Adjust size as needed */
-  font-weight: 790; /* Optional: make it bolder */
-  color: #000000;
+.powered-logo {
+  height: 1.8rem;
   margin-left: 5px;
+  vertical-align: middle; /* aligns with text baseline */
 }
+
 
 
 /* ✅ Responsive Fixes */
@@ -241,5 +254,28 @@ button[type="submit"]:hover {
 
   .carousel-item {
     height: 180px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .welcome-box {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .welcome-logo {
+    height: 40px; /* smaller logo on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-box {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+
+  .welcome-logo {
+    height: 15px; /* even smaller */
   }
 }
