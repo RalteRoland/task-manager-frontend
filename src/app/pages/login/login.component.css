@@ -23,13 +23,15 @@
   font-size: 4rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  margin-left: 40%;
+  margin-top: 5%;
 }
 
 .carousel-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20%;
+  margin-top: 15%;
   border-radius: 15px;
   max-width: 700px;
   width: 100%;
@@ -45,7 +47,6 @@
 .carousel-item {
   position: relative;
   height: 100%; /* make sure it matches the fixed height */
-
 }
 
 .carousel-item img {
@@ -55,12 +56,11 @@
   display: block;
 }
 
-
 /* Indicators - styled and consistent */
 .carousel-indicators button {
   background-color: black;
-  width: 28px;
-  height: 8px;
+  width: 22px;
+  height: 7px;
   border-radius: 999px;
   margin: 6px;
   opacity: 0.3;
@@ -70,13 +70,10 @@
 }
 
 .carousel-indicators .active {
+  width: 32px;
   opacity: 0.8;
   transform: scale(1.2); /* slightly enlarges active without affecting layout */
 }
-
-
-
-
 
 /* Right side */
 .right-panel {
@@ -89,21 +86,22 @@
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05);
 }
 
-
 .login-form {
   width: 100%;
-  max-width: 320px;
-  text-align: center;
+  max-width: 380px;
+  text-align: start;
+
 }
 
-.login-form h2{
+.login-form h3 {
   font-weight: 100;
+  font-size: 1.8rem;
 }
 
 .login-form h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  font-weight: 150;
+  font-size: 2.8rem;
+  margin-bottom: 4rem;
+  font-weight: 100;
 }
 
 .login-form form {
@@ -120,42 +118,128 @@ input[type="email"] {
 }
 
 button[type="submit"] {
+  height: 60px;
   padding: 0.75rem;
-  background: linear-gradient(to right, #3a3aff, #b83aff);
+  background: linear-gradient(to right, #00178d, #b742fe, #e945a7);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.5s ease-in-out;
 }
 
+button[type="submit"]:hover {
+  background: linear-gradient(to right, #5a46c8, #8f57ff, #b87de0);
+}
+
+
+
 .mobile-btn {
+  height: 60px;
+  font-weight: 600;
   padding: 0.75rem;
   border: 2px solid #333;
   background-color: white;
-  border-radius: 6px;
+  color: #333;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+.mobile-btn:hover {
+  background-color: #333;
+  color: white;
+  border-color: white;
+}
+
+
+
 .divider {
-  margin: 0.5rem 0;
-  color: #999;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #cfcfcf;
   font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid #dfdfdf;
+}
+
+.divider::before {
+  margin-right: 0.75rem;
+}
+
+.divider::after {
+  margin-left: 0.75rem;
 }
 
 .terms {
-  margin-top: 1rem;
+  letter-spacing: 1.5px;
+  margin-top: 2.5rem;
   font-size: 0.8rem;
   color: #666;
+  text-align: center;
+  line-height: 1.4;
 }
 
 .terms a {
-  color: #3a3aff;
+  display: block; /* Forces it onto a new line */
+  margin-top: 0.25rem;
+  color: #5151ff;
   text-decoration: none;
 }
 
+
 .powered {
-  margin-top: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
   font-size: 0.9rem;
-  color: #999;
+  color: #6c6c6c;
+}
+
+.powered strong {
+  font-size: 1.8rem; /* Adjust size as needed */
+  font-weight: 790; /* Optional: make it bolder */
+  color: #000000;
+  margin-left: 5px;
+}
+
+
+/* ✅ Responsive Fixes */
+@media (max-width: 768px) {
+  .login-wrapper {
+    grid-template-columns: 1fr; /* stack left and right panels */
+  }
+
+  .left-panel {
+    height: auto;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .carousel-container {
+    margin-top: 10%;
+    max-width: 100%;
+  }
+
+  .carousel-item {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    margin-top: 5%;
+  }
+
+  .carousel-item {
+    height: 180px;
+  }
 }
