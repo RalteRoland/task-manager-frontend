@@ -126,12 +126,14 @@
 input[type="email"] {
   padding: 0.75rem;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 1rem;
+  height: 55px;
+  margin-bottom: 10px;
 }
 
 button[type="submit"] {
-  height: 60px;
+  height: 55px;
   padding: 0.75rem;
   background: linear-gradient(to right, #00178d, #b742fe, #e945a7);
   color: white;
@@ -149,7 +151,7 @@ button[type="submit"]:hover {
 
 
 .mobile-btn {
-  height: 60px;
+  height: 55px;
   font-weight: 600;
   padding: 0.75rem;
   border: 2px solid #333;
