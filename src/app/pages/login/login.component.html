@@ -42,9 +42,19 @@
       <h3>Welcome To</h3>
       <h1>FRONTLYNE</h1>
 
-      <form>
-        <input type="email" placeholder="Enter email ID" required>
-        <button type="submit">CONTINUE</button>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter email ID"
+          [(ngModel)]="email"
+          required
+        />
+        <button type="submit" [disabled]="loginForm.invalid">CONTINUE</button>
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
 
         <div class="divider">or</div>
 

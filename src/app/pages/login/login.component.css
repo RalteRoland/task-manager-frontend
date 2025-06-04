@@ -36,10 +36,6 @@
   margin-left: 25%;
 }
 
-
-
-
-
 .carousel-container {
   display: flex;
   justify-content: center;
@@ -148,8 +144,6 @@ button[type="submit"]:hover {
   background: linear-gradient(to right, #5a46c8, #8f57ff, #b87de0);
 }
 
-
-
 .mobile-btn {
   height: 55px;
   font-weight: 600;
@@ -167,8 +161,6 @@ button[type="submit"]:hover {
   color: white;
   border-color: white;
 }
-
-
 
 .divider {
   display: flex;
@@ -223,8 +215,6 @@ button[type="submit"]:hover {
   margin-left: 5px;
   vertical-align: middle; /* aligns with text baseline */
 }
-
-
 
 /* ✅ Responsive Fixes */
 @media (max-width: 768px) {
