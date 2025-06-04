@@ -9,35 +9,52 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  step: number = 1;           // Step 1 = email, Step 2 = password
   email: string = '';
+  password: string = '';
   errorMessage: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
-  onSubmit(): void {
-    console.log('🚀 onSubmit called with email:', this.email);
-    console.log('🚀 Form valid?', this.email && this.email.length > 0);
-
-    // Check if email is empty
-    if (!this.email || this.email.trim() === '') {
-      console.log('❌ Email is empty');
-      this.errorMessage = 'Please enter an email address';
+  submitEmail(): void {
+    if (!this.email.trim()) {
+      this.errorMessage = 'Please enter your email.';
       return;
     }
 
-    console.log('📡 Making API call...');
-    this.loginService.login(this.email).subscribe({
-      next: (response: any) => {
-        console.log('✅ Login successful', response);
+    // Proceed to step 2 (password input)
+    this.errorMessage = '';
+    this.step = 2;
+  }
+
+  submitPassword(): void {
+    if (!this.password.trim()) {
+      this.errorMessage = 'Please enter your password.';
+      return;
+    }
+
+    this.loginService.login(this.email, this.password).subscribe({
+      next: (res) => {
+        console.log('Login successful:', res);
         this.errorMessage = '';
         this.router.navigate(['/dashboard']);
       },
-      error: (err: any) => {
-        console.error('❌ Login failed', err);
-        console.error('❌ Error details:', err.error);
-        console.error('❌ Status:', err.status);
-        this.errorMessage = 'Login failed. Please check your email.';
+      error: (err) => {
+        console.error('Login failed:', err);
+        this.errorMessage = 'Invalid email or password.';
       }
     });
   }
+
+  onSubmit(): void {
+    if (this.step === 1) {
+      this.submitEmail();
+    } else if (this.step === 2) {
+      this.submitPassword();
+    }
+  }
+
 }

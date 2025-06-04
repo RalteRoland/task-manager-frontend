@@ -1,5 +1,5 @@
 <div class="login-wrapper">
-  <!--Left section-->
+  <!-- Left panel stays unchanged -->
   <div class="left-panel">
     <div class="welcome-box">
       <img src="/assets/frontlyne-logo.svg" alt="Frontlyne logo" class="welcome-logo" />
@@ -7,60 +7,64 @@
 
     <div class="carousel-container">
       <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5500">
-
-
-        <!-- Indicators -->
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
           <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
 
-        <!-- Slides -->
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="assets/carousel_1.jpg" class="d-block w-100" alt="Slide 1">
+            <img src="assets/carousel_1.jpg" class="d-block w-100" alt="Slide 1" />
           </div>
           <div class="carousel-item">
-            <img src="assets/carousel_2.jpg" class="d-block w-100" alt="Slide 2">
+            <img src="assets/carousel_2.jpg" class="d-block w-100" alt="Slide 2" />
           </div>
           <div class="carousel-item">
-            <img src="assets/carousel_3.jpg" class="d-block w-100" alt="Slide 3">
+            <img src="assets/carousel_3.jpg" class="d-block w-100" alt="Slide 3" />
           </div>
         </div>
       </div>
     </div>
-
-
-
   </div>
 
-  <!-- Right Section -->
-
+  <!-- Right panel -->
   <div class="right-panel">
     <div class="login-form">
       <h3>Welcome To</h3>
       <h1>FRONTLYNE</h1>
 
       <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter email ID"
-          [(ngModel)]="email"
-          required
-        />
-        <button type="submit" [disabled]="loginForm.invalid">CONTINUE</button>
+        <!-- Step 1: Email input -->
+        <div *ngIf="step === 1" class="form-step">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter email ID"
+            [(ngModel)]="email"
+            required
+            class="auth-input"
+          />
+          <button type="submit" [disabled]="loginForm.invalid">CONTINUE</button>
+        </div>
 
+        <!-- Step 2: Password input -->
+        <div *ngIf="step === 2" class="form-step">
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            [(ngModel)]="password"
+            required
+            class="auth-input"
+          />
+          <button type="submit" [disabled]="loginForm.invalid">LOGIN</button>
+        </div>
+
+        <!-- Error Message -->
         <div *ngIf="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
-
-        <div class="divider">or</div>
-
-        <button type="button" class="mobile-btn">
-          LOGIN USING MOBILE NUMBER
-        </button>
       </form>
 
       <p class="terms">
@@ -72,7 +76,6 @@
         Powered by
         <img src="/assets/frontlyne-logo-black.svg" alt="Frontlyne logo" class="powered-logo" />
       </p>
-
     </div>
   </div>
 </div>

@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private baseUrl = 'http://localhost:3000'; // Rails API URL
+  private apiUrl = 'http://localhost:3000'; // Adjust if your backend is hosted elsewhere
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  login(email: string): Observable<any> {
-    console.log('🔥 Login service called with email:', email);
-    const payload = { user: { email } };
-    return this.http.post(`${this.baseUrl}/users/sign_in`, payload, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true // Important for Devise sessions
+  login(email: string, password: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
+
+    const body = {
+      user: {
+        email: email,
+        password: password
+      }
+    };
+
+    return this.http.post(`${this.apiUrl}/users/sign_in`, body, { headers });
   }
 }
