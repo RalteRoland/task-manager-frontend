@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl = 'http://localhost:3000'; // Adjust if your backend is hosted elsewhere
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -22,6 +22,9 @@ export class LoginService {
       }
     };
 
-    return this.http.post(`${this.apiUrl}/users/sign_in`, body, { headers });
+    return this.http.post(`${this.apiUrl}/users/sign_in`, body, {
+      headers,
+      withCredentials: true
+    });
   }
 }
