@@ -9,10 +9,10 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  step: number = 1;           // Step 1 = email, Step 2 = password
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  step = 1; // 1 = email input, 2 = password input
+  email = '';
+  password = '';
+  errorMessage = '';
 
   constructor(
     private loginService: LoginService,
@@ -25,7 +25,6 @@ export class LoginComponent {
       return;
     }
 
-    // Proceed to step 2 (password input)
     this.errorMessage = '';
     this.step = 2;
   }
@@ -37,24 +36,17 @@ export class LoginComponent {
     }
 
     this.loginService.login(this.email, this.password).subscribe({
-      next: (res) => {
-        console.log('Login successful:', res);
+      next: () => {
         this.errorMessage = '';
         this.router.navigate(['/dashboard']);
       },
-      error: (err) => {
-        console.error('Login failed:', err);
+      error: () => {
         this.errorMessage = 'Invalid email or password.';
       }
     });
   }
 
   onSubmit(): void {
-    if (this.step === 1) {
-      this.submitEmail();
-    } else if (this.step === 2) {
-      this.submitPassword();
-    }
+    this.step === 1 ? this.submitEmail() : this.submitPassword();
   }
-
 }

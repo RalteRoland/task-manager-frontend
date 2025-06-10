@@ -1,36 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
-interface DashboardData {
-  tasks_count: number;
-  pending_count: number;
-  in_progress_count: number;
-  done_count: number;
-  upcoming_tasks: any[];
-}
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
-  private baseUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3000/dashboard';
 
-  constructor(private http: HttpClient) { }
-  getDashboardData(): Observable<DashboardData> {
-    console.log('🔥 Fetching dashboard data from:', `${this.baseUrl}/dashboard`);
-    return this.http.get<DashboardData>(`${this.baseUrl}/dashboard`, {
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    }).pipe(
-    catchError((error: HttpErrorResponse) => {
-      console.error('Dashboard API Error:', error);
-      return throwError(() => error);
-    })
-  );
-}
+  constructor(private http: HttpClient) {}
+
+  getDashboardData(): Observable<any> {
+    // Sends GET request with cookies (for Devise session authentication)
+    return this.http.get(this.apiUrl, { withCredentials: true });
+  }
 }

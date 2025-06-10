@@ -49,4 +49,6 @@ export class DashboardComponent implements OnInit {
     console.log('Create new task');
     alert('Create task page coming soon!');
   }
+
+
 }
