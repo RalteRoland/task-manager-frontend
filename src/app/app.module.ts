@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    LogoutButtonComponent
+    LogoutButtonComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,

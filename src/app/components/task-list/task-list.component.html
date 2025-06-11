@@ -1,0 +1,22 @@
+<h2>All Tasks</h2>
+
+<table class="table table-striped" *ngIf="tasks.length > 0; else noTasks">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Due Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.title }}</td>
+      <td>{{ task.status }}</td>
+      <td>{{ task.due_date | date }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #noTasks>
+  <p>No tasks found.</p>
+</ng-template>

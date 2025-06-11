@@ -1,72 +1,83 @@
-<div class="dashboard-container">
-  <!-- Header Section -->
-  <div class="dashboard-header">
-    <h1>Task</h1>
-    <p class="subtitle">Manage and track all tasks assigned to your team.</p>
-  </div>
+<div class="container">
 
-  <!-- Loading/Error States (Kept from original) -->
-  <div *ngIf="loading" class="alert alert-info">Loading dashboard...</div>
-  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <nav class="navbar">
+    <div class="logo">TaskMaster</div>
+    <!--<div class="nav-links">
+      <a routerLink="/dashboard">Dashboard</a>
+      <a>Tasks</a>
+      <a>Reports</a>
+      <a>People</a>
+    </div>-->
+    <div class="nav-right">
+      <input type="text" placeholder="Search" class="search-box" />
+      <!--<div class="icon user-icon"></div>-->
+    </div>
+  </nav>
 
-  <!-- Stats Cards (Bootstrap Grid) -->
-  <div *ngIf="!loading && !error" class="stats-section">
-    <div class="row">
-      <!-- Total Tasks -->
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Tasks</h1>
+      <p class="subtitle">Manage and track all tasks assigned to your team.</p>
+      <button class="create-task-btn" (click)="createTask()">Create Task</button>
+    </div>
+
+    <!-- Loading/Error States -->
+    <div *ngIf="loading" class="alert alert-info">Loading dashboard...</div>
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+    <!-- Stats Cards -->
+    <div *ngIf="!loading && !error" class="stats-section row">
       <div class="col-md-4">
-        <div class="stat-card">
+        <div class="stat-card border-default">
           <h3>Total Tasks</h3>
           <p class="stat-value">{{ dashboardData['tasks_count'] || 0 }}</p>
         </div>
       </div>
-
-      <!-- Completed Tasks -->
       <div class="col-md-4">
-        <div class="stat-card completed">
+        <div class="stat-card border-success">
           <h3>Completed Tasks</h3>
           <p class="stat-value">{{ dashboardData['done_count'] || 0 }}</p>
         </div>
       </div>
-
-      <!-- Overdue Tasks -->
       <div class="col-md-4">
-        <div class="stat-card overdue">
+        <div class="stat-card border-warning">
           <h3>Overdue Tasks</h3>
           <p class="stat-value">{{ dashboardData['overdue_count'] || 0 }}</p>
         </div>
       </div>
     </div>
+
+    <!-- Task Table -->
+    <div class="task-table-section">
+      <h2>Task List</h2>
+      <div *ngIf="dashboardData['all_tasks']?.length > 0; else noTasks">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Task Name</th>
+              <th>Assignee</th>
+              <th>Due Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of dashboardData['all_tasks']">
+              <td>{{ task.title }}</td>
+              <td>{{ task.assignee || 'Unassigned' }}</td>
+              <td>{{ task.due_date | date }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="task.status.toLowerCase()">
+                  {{ task.status.replace('_', ' ') | titlecase }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noTasks>
+        <p class="no-tasks-message">No tasks found.</p>
+      </ng-template>
+    </div>
   </div>
 
-  <!-- Task Table (Bootstrap Table) -->
-  <div class="task-table-section">
-    <h2>Task List</h2>
-    <div *ngIf="dashboardData['upcoming_tasks']?.length > 0; else noTasks">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Task Name</th>
-            <th>Assignee</th>
-            <th>Due Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let task of dashboardData['upcoming_tasks']">
-            <td>{{ task.title }}</td>
-            <td>{{ task.assignee || 'Unassigned' }}</td>
-            <td>{{ task.due_date | date }}</td>
-            <td>
-              <span class="status-badge" [ngClass]="task.status.toLowerCase()">
-                {{ task.status.replace('_', ' ') | titlecase }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <ng-template #noTasks>
-      <p class="no-tasks-message">No tasks found.</p>
-    </ng-template>
-  </div>
 </div>

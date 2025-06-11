@@ -1,4 +1,3 @@
-// dashboard.component.ts - COMPLETE FILE
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardService } from '../../services/dashboard.service';
@@ -21,6 +20,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDashboard();
+
+
   }
 
   loadDashboard(): void {
