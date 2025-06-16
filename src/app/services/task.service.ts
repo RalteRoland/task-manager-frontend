@@ -14,5 +14,10 @@ export class TaskService {
     return this.http.get(this.apiUrl, { withCredentials: true });
   }
 
+  createTask(taskData: any): Observable<any> {
+  return this.http.post(`${this.apiUrl}`, taskData, { withCredentials: true });
+}
+
+
 
 }

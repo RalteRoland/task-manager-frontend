@@ -74,7 +74,7 @@
 .status-badge {
   padding: 0.3rem 0.6rem;
   border-radius: 5px;
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 0.85rem;
 }
 .status-badge.completed {

@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   loading = true;
   error = '';
 
+
   constructor(
     private dashboardService: DashboardService,
     private router: Router
@@ -46,10 +47,7 @@ export class DashboardComponent implements OnInit {
   }
 
   createTask(): void {
-    // TODO: Navigate to create task page when we create it
-    console.log('Create new task');
-    alert('Create task page coming soon!');
+    this.router.navigate(['/tasks/new']);
   }
-
 
 }

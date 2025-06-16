@@ -1,0 +1,110 @@
+<main class="main-content">
+    <div class="form-container">
+        <h1 class="page-title">Create New Task</h1>
+
+        <form class="task-form" (ngSubmit)="submitTask()" #taskForm="ngForm">
+            <!-- Task Title -->
+            <div class="form-group">
+                <label for="taskTitle" class="form-label">Task Title</label>
+                <input type="text" id="taskTitle" name="title" class="form-input" placeholder="Enter task title" [(ngModel)]="task.title" required>
+            </div>
+
+            <!-- Task Description -->
+            <div class="form-group">
+                <label for="taskDescription" class="form-label">Task Description</label>
+                <textarea id="taskDescription" name="description" class="form-textarea" rows="6" [(ngModel)]="task.description" required></textarea>
+            </div>
+
+            <!-- Assignee -->
+            <div class="form-group">
+                <label for="assignee" class="form-label">Assignee</label>
+                <select id="assignee" name="assignee" class="form-select" [(ngModel)]="task.assigneeId" required>
+                    <option value="" disabled>Select user</option>
+                    <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
+                </select>
+            </div>
+
+            <!-- Due Date -->
+            <div class="form-group">
+                <label for="dueDate" class="form-label">Due Date</label>
+                <input type="date" id="dueDate" name="dueDate" placeholder="Select due date"  class="form-input date-input" [(ngModel)]="task.dueDate" required>
+            </div>
+
+            <!-- Subtasks -->
+            <div class="form-section">
+                <h3 class="section-title">Subtasks</h3>
+                <div class="subtasks-container">
+                    <div class="subtasks-header">
+                        <div class="subtasks-info">
+                            <h4 class="subtasks-title">Add Subtasks</h4>
+                            <p class="subtasks-description">Break down your task into smaller, manageable steps.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attachments -->
+            <div class="form-section">
+                <h3 class="section-title">Attachments</h3>
+                <div class="attachments-container">
+                    <div class="attachments-header">
+                        <div class="attachments-info">
+                            <h4 class="attachments-title">Attach Files</h4>
+                            <p class="attachments-description">Add relevant documents or files to support your task.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary">Upload</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reminders -->
+            <div class="form-group">
+                <h3 class="section-title">Reminders</h3>
+                <label for="reminder" class="form-label">Set Reminder</label>
+                <select id="reminder" class="form-select">
+                    <option value="">Select date and time</option>
+                </select>
+            </div>
+
+            <!-- Custom Properties -->
+            <div class="form-section">
+                <h3 class="section-title">Custom Properties</h3>
+
+                <!-- Priority -->
+                <div class="form-group">
+                    <label for="priority" class="form-label">Priority</label>
+                    <select id="priority" class="form-select">
+                        <option value="">Select</option>
+                        <!--
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="urgent">Urgent</option>
+                        -->
+                    </select>
+                </div>
+
+                <!-- Tags -->
+                <div class="form-group">
+                    <label for="tags" class="form-label">Tags</label>
+                    <select id="tags" class="form-select">
+
+                        <option value="">Select</option>
+                      <!--
+                        <option value="development">Development</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="research">Research</option>
+                      -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">Create Task</button>
+            </div>
+        </form>
+    </div>
+</main>
