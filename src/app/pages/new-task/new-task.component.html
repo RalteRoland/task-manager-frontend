@@ -18,7 +18,7 @@
             <!-- Assignee -->
             <div class="form-group">
                 <label for="assignee" class="form-label">Assignee</label>
-                <select id="assignee" name="assignee" class="form-select" [(ngModel)]="task.assigneeId" required>
+                <select id="assignee" name="assignee" class="form-select" [(ngModel)]="task.assigneeId" >
                     <option value="" disabled>Select user</option>
                     <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
                 </select>

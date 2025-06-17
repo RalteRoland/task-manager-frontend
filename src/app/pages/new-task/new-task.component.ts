@@ -38,8 +38,7 @@ export class NewTaskComponent {
       !this.task.title ||
       !this.task.description ||
       !this.task.assigneeId ||
-      !this.task.dueDate ||
-      !this.task.status
+      !this.task.dueDate
     ) {
       alert('Please fill in all required fields.');
       return;

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginService {
   private readonly apiUrl = 'http://localhost:3000';
 
@@ -17,7 +18,8 @@ export class LoginService {
 
     return this.http.post(`${this.apiUrl}/users/sign_in`, body, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      withCredentials: true
+      withCredentials: true,
+      observe: 'response' // This allows us to access the response headers
     });
   }
 }
