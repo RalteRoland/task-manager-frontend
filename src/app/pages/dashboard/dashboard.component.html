@@ -1,19 +1,4 @@
 <div class="container">
-
-  <nav class="navbar">
-    <div class="logo">TaskMaster</div>
-    <!--<div class="nav-links">
-      <a routerLink="/dashboard">Dashboard</a>
-      <a>Tasks</a>
-      <a>Reports</a>
-      <a>People</a>
-    </div>-->
-    <div class="nav-right">
-      <input type="text" placeholder="Search" class="search-box" />
-      <!--<div class="icon user-icon"></div>-->
-    </div>
-  </nav>
-
   <div class="dashboard-container">
     <div class="dashboard-header">
       <h1>Tasks</h1>
@@ -48,7 +33,7 @@
     </div>
 
     <!-- Task Table -->
-    <div class="task-table-section">
+    <div class="table table-bordered">
       <div *ngIf="dashboardData['all_tasks']?.length > 0; else noTasks">
         <table class="table table-hover">
           <thead>
