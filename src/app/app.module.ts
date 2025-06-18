@@ -10,12 +10,13 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'tasks/new', component: NewTaskComponent }, // <-- Add this line
+  { path: 'tasks/new', component: NewTaskComponent },
 ];
 
 @NgModule({
@@ -25,7 +26,8 @@ const routes: Routes = [
     DashboardComponent,
     LogoutButtonComponent,
     TaskListComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

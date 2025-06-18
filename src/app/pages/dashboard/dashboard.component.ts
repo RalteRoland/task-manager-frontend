@@ -50,4 +50,14 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/tasks/new']);
   }
 
+  getStatusLabel(status: string): string {
+  switch (status) {
+    case 'in_progress': return 'In Progress';
+    case 'done': return 'Completed';
+    case 'overdue': return 'Overdue';
+    default: return status;
+  }
+}
+
+
 }

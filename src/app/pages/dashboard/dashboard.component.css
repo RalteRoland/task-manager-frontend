@@ -1,15 +1,29 @@
+.container {
+  max-width: 1000px; /* or 1000px, or any size you prefer */
+  margin: 0 auto;     /* centers the container */
+  padding: 0 1rem;    /* optional: horizontal spacing inside */
+}
+
 /* Header */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2rem 1rem 1rem;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: left;
+
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+
 }
 
 .subtitle {
   color: #6c757d;
 }
-
 
 .create-task-btn {
   background-color: #007bff;
@@ -21,54 +35,101 @@
   height: 40px;
   cursor: pointer;
 }
+
 .create-task-btn:hover {
   background-color: #0056b3;
 }
 
 /* Stat Cards */
 .stat-card {
+  font-size: 16px;
   gap: 16px;
   padding: 16px;
   margin: 0.5rem 0;
-  border: 2px solid #ccc;
+  border: 1px solid;
   border-radius: 8px;
+  margin-bottom: 50px;
 }
-.border-default {
-  border-color: #ccc;
+.card-border-default {
+  border-color: #333333;
 }
-.border-success {
-  border-color: #28a745;
+.card-border-success {
+  border-color: #27AE60;
 }
-.border-warning {
-  border-color: #ffc107;
+.card-border-warning {
+  border-color: #F2994A;
 }
 
 /* Task Table */
-.table-bordered {
-  margin-top: 20px;
-  border: none;
+.table {
+  border: 1px solid #dee2e6;
+  border-radius: 16px;
   width: 100%;
-  border-collapse: collapse;
   table-layout: fixed;
+  overflow: hidden; /* Ensures content doesn't overflow rounded corners */
+  margin-bottom: 0%;
+}
+
+.table th {
+  font-weight: 500;
 }
 
 /* Table header and cell styling */
-.table-bordered th,
-.table-bordered td {
+.table th{
+  padding: 16px;
+}
+
+
+.table td {
   border-left: none;
   border-right: none;
   border-top: 1px solid #dee2e6;
   border-bottom: 1px solid #dee2e6;
-  padding: 16px 12px;
+  padding: 30px 12px;
   vertical-align: middle;
   text-align: center;
+
+}
+
+/* Remove top border from first row and bottom border from last row for clean rounded appearance */
+.table thead tr:first-child th {
+  border-top: none;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Remove fixed widths for first and second columns */
+.table th:nth-child(1),
+.table td:nth-child(1),
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: auto;
+  min-width: unset;
 }
 
 /* Task Name column aligned left */
-.table-bordered th:first-child,
-.table-bordered td:first-child {
+.table th:first-child,
+.table td:first-child {
   text-align: left;
-  padding-left: 16px;
+  padding-left: 12px;
+}
+
+/* Assignee and Due Date columns centered */
+.table th:nth-child(2),
+.table td:nth-child(2),
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  text-align: center;
+}
+
+/* Status column aligned right */
+.table th:last-child,
+.table td:last-child {
+  text-align: right;
+  padding-right: 12px;
+  padding-left: 0;
 }
 
 /* Task Name color and weight */
@@ -78,20 +139,21 @@
 }
 
 /* Status badge column aligned right */
-.table-bordered th:last-child {
-  text-align: left;
-  padding-left: 12px;
+.table th:last-child {
+  text-align: start;
+  padding-left: 70px;
   padding-right: 0;
+
 }
 
 /* Status badge styling */
-.status-badge {
+
+.status-pill {
   display: inline-block;
-  width: 100%;
-  max-width: 240px;
+  width: 160px;
   padding: 8px 0;
   border-radius: 14px;
-  font-size: 0.85rem;
+  font-size: 14px;
   font-weight: 500;
   color: #fff;
   text-align: center;
@@ -100,18 +162,14 @@
   margin-right: 8px; /* Added spacing from the right edge */
 }
 
+.in_progress {
+  background-color: #2D9CDB;
+}
 
-
-.status-badge.done {
+.done {
   background-color: #28a745;
 }
-.status-badge.in_progress {
-  background-color: #007bff;
-}
-.status-badge.pending {
-  background-color: #ffc107;
-  color: black;
-}
-.status-badge.overdue {
-  background-color: #dc3545;
+
+.overdue {
+  background-color: #EB5757;
 }

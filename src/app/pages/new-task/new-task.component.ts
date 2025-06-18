@@ -25,7 +25,7 @@ export class NewTaskComponent {
     description: '',
     assigneeId: null,
     dueDate: '',
-    status: 'pending'
+    status: 'in_progress'  // Changed from 'pending' to 'in_progress'
   };
 
   constructor(

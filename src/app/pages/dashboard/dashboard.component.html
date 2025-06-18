@@ -1,11 +1,12 @@
 <div class="container">
   <div class="dashboard-container">
     <div class="dashboard-header">
-      <h1>Tasks</h1>
-      <p class="subtitle">Manage and track all tasks assigned to your team.</p>
+      <div class="title-section">
+        <h1>Tasks</h1>
+        <p class="subtitle">Manage and track all tasks assigned to your team.</p>
+      </div>
       <button class="create-task-btn" (click)="createTask()">Create Task</button>
     </div>
-
     <!-- Loading/Error States -->
     <div *ngIf="loading" class="alert alert-info">Loading dashboard...</div>
     <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
@@ -13,27 +14,27 @@
     <!-- Stats Cards -->
     <div *ngIf="!loading && !error" class="stats-section row">
       <div class="col-md-4">
-        <div class="stat-card border-default">
-          <h3>Total Tasks</h3>
-          <p class="stat-value">{{ dashboardData['tasks_count'] || 0 }}</p>
+        <div class="stat-card card-border-default">
+          <h5>Total Tasks</h5>
+          <h4 class="stat-value">{{ dashboardData['tasks_count'] || 0 }}</h4>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="stat-card border-success">
-          <h3>Completed Tasks</h3>
-          <p class="stat-value">{{ dashboardData['done_count'] || 0 }}</p>
+        <div class="stat-card card-border-success">
+          <h5>Completed Tasks</h5>
+          <h4 class="stat-value">{{ dashboardData['done_count'] || 0 }}</h4>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="stat-card border-warning">
-          <h3>Overdue Tasks</h3>
-          <p class="stat-value">{{ dashboardData['overdue_count'] || 0 }}</p>
+        <div class="stat-card card-border-warning">
+          <h5>Overdue Tasks</h5>
+          <h4 class="stat-value">{{ dashboardData['overdue_count'] || 0 }}</h4>
         </div>
       </div>
     </div>
 
     <!-- Task Table -->
-    <div class="table table-bordered">
+    <div class="table">
       <div *ngIf="dashboardData['all_tasks']?.length > 0; else noTasks">
         <table class="table table-hover">
           <thead>
@@ -50,8 +51,8 @@
               <td>{{ task.assignee || 'Unassigned' }}</td>
               <td>{{ task.due_date | date }}</td>
               <td>
-                <span class="status-badge" [ngClass]="task.status.toLowerCase()">
-                  {{ task.status.replace('_', ' ') | titlecase }}
+                <span class="status-pill" [ngClass]="task.display_status || task.status">
+                  {{ getStatusLabel(task.display_status || task.status) }}
                 </span>
               </td>
             </tr>
