@@ -47,9 +47,13 @@
           </thead>
           <tbody>
             <tr *ngFor="let task of dashboardData['all_tasks']">
-              <td>{{ task.title }}</td>
+              <td>
+                <a [routerLink]="['/tasks', task.id]" class="text-primary text-decoration-none">
+                  {{ task.title }}
+                </a>
+              </td>
               <td>{{ task.assignee || 'Unassigned' }}</td>
-              <td>{{ task.due_date | date }}</td>
+              <td>{{ task.due_date | date:'yyyy-MM-dd' }}</td>
               <td>
                 <span class="status-pill" [ngClass]="task.display_status || task.status">
                   {{ getStatusLabel(task.display_status || task.status) }}
@@ -64,5 +68,4 @@
       </ng-template>
     </div>
   </div>
-
 </div>

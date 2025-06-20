@@ -1,0 +1,9 @@
+.navbar {
+  background-color: white;
+  border-bottom: 1px solid #dadada; /* or any color you want */
+}
+
+.nav-item{
+  margin-left: 15px;
+  font-weight: bold;
+}

@@ -28,10 +28,19 @@ export class NewTaskComponent {
     status: 'in_progress'  // Changed from 'pending' to 'in_progress'
   };
 
+  attachments: File[] = [];
+
   constructor(
     private taskService: TaskService,
     private router: Router
   ) {}
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.attachments = Array.from(input.files);
+    }
+  }
 
   submitTask(): void {
     if (
@@ -44,12 +53,21 @@ export class NewTaskComponent {
       return;
     }
 
-    this.task.assigneeId = Number(this.task.assigneeId);
+    const formData = new FormData();
+    formData.append('task[title]', this.task.title);
+    formData.append('task[description]', this.task.description);
+    formData.append('task[assignee_id]', this.task.assigneeId.toString());
+    formData.append('task[due_date]', this.task.dueDate);
+    formData.append('task[status]', this.task.status);
 
-    this.taskService.createTask(this.task).subscribe({
+    this.attachments.forEach(file => {
+      formData.append('task[attachments][]', file); //
+    });
+
+    this.taskService.createTask(formData).subscribe({
       next: (response: any) => {
         console.log('Task created:', response);
-        this.router.navigate(['/dashboard']); // Redirect to dashboard
+        this.router.navigate(['/dashboard']);
       },
       error: (error: any) => {
         console.error('Failed to create task:', error);

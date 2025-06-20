@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,11 +12,27 @@ export class TaskService {
 
   getTasks(): Observable<any> {
     return this.http.get(this.apiUrl, {
-      withCredentials: true  // Use session cookies like your login
+      withCredentials: true
     });
   }
 
-  createTask(taskData: any): Observable<any> {
+  getTask(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`, {
+      withCredentials: true
+    });
+  }
+
+  // Updated method to handle FormData (for file uploads)
+  createTask(formData: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, formData, {
+      withCredentials: true
+      // Don't set Content-Type header - let browser set it automatically for FormData
+      // This ensures proper multipart/form-data boundary is set
+    });
+  }
+
+  // Alternative method for tasks without files (JSON)
+  createTaskWithoutFiles(taskData: any): Observable<any> {
     const payload = {
       task: {
         title: taskData.title,
@@ -29,10 +45,10 @@ export class TaskService {
 
     return this.http.post(this.apiUrl, payload, {
       withCredentials: true,
-      headers: new HttpHeaders({
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      })
+      }
     });
   }
 }

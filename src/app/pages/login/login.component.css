@@ -1,4 +1,4 @@
-/* Root wrapper with 60/40 grid */
+
 .login-wrapper {
   display: grid;
   grid-template-columns: 4fr 2fr; /* 80/20 split */
