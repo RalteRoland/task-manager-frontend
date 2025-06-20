@@ -1,15 +1,17 @@
 /* view-task.component.css */
 
-.task-image {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 0.5rem;
-}
-
 .status-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   display: inline-block;
+}
+
+
+.task-image {
+  max-width: 412px;
+  max-height: 412px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  object-fit: cover;
 }

@@ -20,24 +20,34 @@
       <!-- Subtasks (placeholder for now) -->
       <div class="mb-4">
         <h5 class="fw-semibold">Subtasks</h5>
-        <div class="text-muted fst-italic">Subtasks will be shown here</div>
+
+        <ul *ngIf="task.subtasks?.length; else noSubtasks" class="list-group">
+          <li *ngFor="let subtask of task.subtasks" class="list-group-item">
+            {{ subtask.title }}
+          </li>
+        </ul>
+
+        <ng-template #noSubtasks>
+          <div class="text-muted fst-italic">No subtasks added.</div>
+        </ng-template>
       </div>
+
 
       <!-- Files (placeholder) -->
       <div class="mb-4">
         <h5 class="fw-semibold">Files</h5>
         <div class="d-flex gap-3 flex-wrap">
-          <img src="" class="task-image">
-          <img src="" class="task-image">
+          <img *ngFor="let fileUrl of task.attachments" [src]="fileUrl" class="task-image" alt="Attachment">
         </div>
       </div>
+
 
       <!-- Comments (placeholder) -->
       <div class="mb-4">
         <h5 class="fw-semibold">Comments</h5>
         <div class="d-flex align-items-start p-3 border rounded">
           <img src="" class="rounded-circle me-3" width="40" height="40">
-          <textarea class="form border-0 shadow-none" rows="2" placeholder="Add a comment..."></textarea>
+          <textarea class="form-control border-0 shadow-none" rows="2" placeholder="Add a comment..."></textarea>
         </div>
       </div>
     </div>

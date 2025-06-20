@@ -41,44 +41,82 @@
 
             <!-- Subtasks -->
             <div class="form-section">
-                <h3 class="section-title">Subtasks</h3>
-                <div class="subtasks-container">
-                    <div class="subtasks-header">
-                        <div class="subtasks-info">
-                            <h4 class="subtasks-title">Add Subtasks</h4>
-                            <p class="subtasks-description">Break down your task into smaller, manageable steps.</p>
-                        </div>
-                        <button type="button" class="btn btn-primary">Add</button>
-                    </div>
+              <h3 class="section-title">Subtasks</h3>
+
+              <div class="subtasks-container">
+                <div class="subtasks-header">
+                  <div class="subtasks-info">
+                    <h4 class="subtasks-title">Add Subtasks</h4>
+                    <p class="subtasks-description">Break down your task into smaller, manageable steps.</p>
+                  </div>
+                  <button type="button" class="btn btn-primary" (click)="addSubtask()">Add</button>
                 </div>
+
+                <div class="subtask-input-group mt-3" *ngFor="let subtask of subtasks; let i = index">
+                  <div class="input-group mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="subtask.title"
+                      name="subtask-{{ i }}"
+                      placeholder="Subtask title"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger"
+                      (click)="removeSubtask(i)"
+                      *ngIf="subtasks.length > 1"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+
 
             <!-- Attachments -->
             <div class="form-section">
-                <h3 class="section-title">Attachments</h3>
-                <div class="attachments-container">
-                    <div class="attachments-header">
-                        <div class="attachments-info">
-                            <h4 class="attachments-title">Attach Files</h4>
-                            <p class="attachments-description">Add relevant documents or files to support your task.</p>
-                        </div>
-                        <button type="button" class="btn btn-primary" (click)="fileInput.click()">Upload</button>
-                        <input #fileInput type="file" (change)="onFileSelected($event)" multiple style="display: none;">
+              <h3 class="section-title">Attachments</h3>
+              <!-- Show selected files -->
+              <ng-container *ngIf="attachments && attachments.length > 0">
+                <div class="attach-file-name d-flex flex-wrap gap-2 mb-3 w-100">
+                  <div
+                    *ngFor="let file of attachments"
+                    class="d-flex align-items-center justify-content-between border rounded px-2 py-1 w-100"
+                  > <div class="clip-icon-wrapper">
+                      <i class="bi bi-paperclip rotated"></i>
                     </div>
-                    <!-- Show selected files -->
-                    <ul *ngIf="attachments.length">
-                      <li *ngFor="let file of attachments">{{ file.name }}</li>
-                    </ul>
+                    <span class="me-2">{{ file.name }}</span>
+                    <button
+                      type="button"
+                      class="btn-sm btn-outline-danger ms-auto delete-task-button"
+                      (click)="removeAttachment(file)"
+                    >
+                      <i class="bi bi-trash3-fill"></i>
+                    </button>
+                  </div>
                 </div>
+              </ng-container>
+              <div class="attachments-container">
+                <div class="attachments-header">
+                  <div class="attachments-info">
+                    <h4 class="attachments-title">Attach Files</h4>
+                    <p class="attachments-description">Add relevant documents or files to support your task.</p>
+                  </div>
+                  <button type="button" class="btn btn-primary" (click)="fileInput.click()">Upload</button>
+                  <input #fileInput type="file" (change)="onFileSelected($event)" multiple style="display: none;">
+                </div>
+              </div>
             </div>
 
             <!-- Reminders -->
-            <div class="form-group">
-                <h3 class="section-title">Reminders</h3>
-                <label for="reminder" class="form-label">Set Reminder</label>
-                <select id="reminder" class="form-select">
-                    <option value="">Select date and time</option>
-                </select>
+            <div class="form-section">
+              <h3 class="section-title">Reminders</h3>
+              <label for="reminder" class="form-label">Set Reminder</label>
+              <select id="reminder" class="form-select">
+                <option value="">Select date and time</option>
+              </select>
             </div>
 
             <!-- Custom Properties -->

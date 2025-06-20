@@ -29,16 +29,35 @@ export class NewTaskComponent {
   };
 
   attachments: File[] = [];
+  subtasks: { title: string }[] = [{ title: '' }];
 
   constructor(
     private taskService: TaskService,
     private router: Router
   ) {}
 
+  addSubtask() {
+  this.subtasks.push({ title: '' });
+}
+
+  removeSubtask(index: number) {
+    this.subtasks.splice(index, 1);
+  }
+
+  removeAttachment(fileToRemove: File) {
+    this.attachments = this.attachments.filter(file => file !== fileToRemove);
+  }
+
+
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files) {
-      this.attachments = Array.from(input.files);
+      const files = Array.from(input.files);
+      // Prevent duplicates by name and size
+      const existing = this.attachments.map(f => f.name + f.size);
+      const newFiles = files.filter(f => !existing.includes(f.name + f.size));
+      this.attachments = this.attachments.concat(newFiles);
+      input.value = '';
     }
   }
 
@@ -53,6 +72,8 @@ export class NewTaskComponent {
       return;
     }
 
+
+
     const formData = new FormData();
     formData.append('task[title]', this.task.title);
     formData.append('task[description]', this.task.description);
@@ -60,9 +81,18 @@ export class NewTaskComponent {
     formData.append('task[due_date]', this.task.dueDate);
     formData.append('task[status]', this.task.status);
 
+    this.subtasks.forEach((subtask, index) => {
+      if (subtask.title.trim() !== '') {
+        formData.append(`task[subtasks_attributes][${index}][title]`, subtask.title);
+      }
+    });
+
+
     this.attachments.forEach(file => {
       formData.append('task[attachments][]', file); //
     });
+
+
 
     this.taskService.createTask(formData).subscribe({
       next: (response: any) => {

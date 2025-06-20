@@ -143,6 +143,7 @@ body {
     gap: 16px;
 }
 
+
 .subtasks-info,
 .attachments-info {
     flex: 1;
@@ -210,6 +211,57 @@ body {
     border-top: 1px solid #f0f0f0;
     grid-column: 1 / -1;
 }
+
+/* File Attachment */
+
+.clip-icon-wrapper {
+  font-size: 24px;
+  color: #666;
+  padding: 0px 5px;
+  margin: 10px;
+  background-color: #e2e2e2;
+  border: 1px solid #e2e0e0;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clip-icon-wrapper .rotated {
+  font-size: smaller;
+  color: black;
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+.delete-task-button{
+  margin-right: 15px;
+  font-size: large;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(76, 76, 76);
+  border: none;
+}
+
+.delete-task-button:hover {
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(187, 22, 22);
+  border: none;
+}
+
+
+/* Rotate only the glyph, not the container */
+.attach-file-name {
+  font-size: smaller;
+  font-weight: bold;
+  padding: none;
+}
+
+.attach-file-name > div {
+  padding: none;
+}
+
 
 /* Responsive Design */
 @media (max-width: 1024px) {
