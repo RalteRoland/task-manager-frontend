@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
     case 'in_progress': return 'In Progress';
     case 'done': return 'Completed';
     case 'overdue': return 'Overdue';
+    case 'open': return 'Open';
     default: return status;
   }
 }

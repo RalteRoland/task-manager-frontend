@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { ViewTaskComponent } from './pages/view-task/view-task.component';
+import { EmployeesTaskListComponent } from './pages/employees-task-list/employees-task-list.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'tasks/new', component: NewTaskComponent },
   { path: 'tasks/:id', component: ViewTaskComponent },
+  { path: 'employees', component: EmployeesTaskListComponent }
+
 
 ];
 

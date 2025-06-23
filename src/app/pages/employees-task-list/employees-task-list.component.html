@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h3>Employees with Task List</h3>
+  <table class="table table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Assigned Tasks</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees">
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.role }}</td>
+        <td>{{ emp.assigned_tasks_count }}</td>
+        <td>
+          <span class="badge bg-success" *ngIf="emp.status === 'Active'">{{ emp.status }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

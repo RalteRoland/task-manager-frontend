@@ -12,6 +12,7 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ViewTaskComponent } from './pages/view-task/view-task.component';
+import { EmployeesTaskListComponent } from './pages/employees-task-list/employees-task-list.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'tasks/new', component: NewTaskComponent },
   { path: 'tasks/:id', component: ViewTaskComponent },
+  { path: 'employees', component: EmployeesTaskListComponent }
 ];
 
 @NgModule({
@@ -30,7 +32,8 @@ const routes: Routes = [
     TaskListComponent,
     NewTaskComponent,
     NavbarComponent,
-    ViewTaskComponent
+    ViewTaskComponent,
+    EmployeesTaskListComponent
 
   ],
   imports: [

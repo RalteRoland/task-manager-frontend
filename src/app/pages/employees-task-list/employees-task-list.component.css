@@ -1,0 +1,18 @@
+.table{
+  border: 1px solid #dee2e6;
+  border-radius: 16px;
+  width: 100%;
+  table-layout: fixed;
+  overflow: hidden; /* Ensures content doesn't overflow rounded corners */
+  margin-bottom: 0%;
+  font-weight: 500;
+  padding: 16px;
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  padding: 30px 12px;
+  vertical-align: middle;
+  text-align: center;
+  color: #61758A
+}

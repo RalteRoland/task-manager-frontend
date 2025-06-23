@@ -21,8 +21,17 @@
       <div class="mb-4">
         <h5 class="fw-semibold">Subtasks</h5>
 
-        <ul *ngIf="task.subtasks?.length; else noSubtasks" class="list-group">
-          <li *ngFor="let subtask of task.subtasks" class="list-group-item">
+        <ul *ngIf="task?.subtasks?.length > 0; else noSubtasks" class="ps-1 mb-2">
+          <li
+            *ngFor="let subtask of task.subtasks"
+            class="d-flex align-items-center subtask-lists"
+          >
+            <input
+              type="checkbox"
+              class="form-check-input me-2"
+              [(ngModel)]="subtask.completed"
+              (change)="updateSubtaskCompletion(subtask)"
+            />
             {{ subtask.title }}
           </li>
         </ul>
@@ -31,6 +40,9 @@
           <div class="text-muted fst-italic">No subtasks added.</div>
         </ng-template>
       </div>
+
+
+
 
 
       <!-- Files (placeholder) -->
@@ -46,8 +58,34 @@
       <div class="mb-4">
         <h5 class="fw-semibold">Comments</h5>
         <div class="d-flex align-items-start p-3 border rounded">
-          <img src="" class="rounded-circle me-3" width="40" height="40">
-          <textarea class="form-control border-0 shadow-none" rows="2" placeholder="Add a comment..."></textarea>
+          <ng-container *ngIf="user?.avatarUrl; else bootstrapAvatar">
+            <img
+              [src]="user.avatarUrl"
+              class="rounded-circle me-3"
+              width="40"
+              height="40"
+              alt="User Avatar"
+            />
+          </ng-container>
+
+          <ng-template #bootstrapAvatar>
+            <div
+              class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="bi bi-person-fill" style="font-size: 1.5rem; color: #6c757d;"></i>
+            </div>
+          </ng-template>
+
+          <!-- Comment Textarea -->
+          <textarea
+            class="form-control border-0 shadow-none"
+            rows="2"
+            placeholder="Add a comment..."
+            style="resize: none;"
+            [(ngModel)]="newComment"
+            (input)="onCommentTyping()"
+          ></textarea>
         </div>
       </div>
     </div>
@@ -66,9 +104,10 @@
         <p class="text-muted mb-1">Priority</p>
         <p class="fw-semibold d-flex align-items-center">
           {{ task.priority | titlecase }}
-          <span class="status-dot bg-warning ms-2"></span>
+          <span class="priority-dot ms-2" [ngClass]="task.priority"></span>
         </p>
       </div>
+
 
       <div class="mb-3">
         <p class="text-muted mb-1">Due Date</p>
@@ -83,7 +122,24 @@
       <div class="mb-3">
         <p class="text-muted mb-1">Assignee</p>
         <div class="d-flex align-items-center">
-          <img src="" class="rounded-circle me-2" width="40" height="40">
+          <ng-container *ngIf="user?.avatarUrl; else bootstrapAvatar">
+          <img
+              [src]="user.avatarUrl"
+              class="rounded-circle me-3"
+              width="40"
+              height="40"
+              alt="User Avatar"
+            />
+          </ng-container>
+
+          <ng-template #bootstrapAvatar>
+            <div
+              class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="bi bi-person-fill" style="font-size: 1.5rem; color: #6c757d;"></i>
+            </div>
+          </ng-template>
           <div>
             <p class="mb-0 fw-medium">{{ task.assignee_name || 'Unassigned' }}</p>
             <small class="text-muted">{{ task.assignee_email }}</small>
@@ -94,7 +150,24 @@
       <div class="mb-3">
         <p class="text-muted mb-1">Created By</p>
         <div class="d-flex align-items-center">
-          <img src="" class="rounded-circle me-2" width="40" height="40">
+          <ng-container *ngIf="user?.avatarUrl; else bootstrapAvatar">
+          <img
+              [src]="user.avatarUrl"
+              class="rounded-circle me-3"
+              width="40"
+              height="40"
+              alt="User Avatar"
+            />
+          </ng-container>
+
+          <ng-template #bootstrapAvatar>
+            <div
+              class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3"
+              style="width: 40px; height: 40px;"
+            >
+              <i class="bi bi-person-fill" style="font-size: 1.5rem; color: #6c757d;"></i>
+            </div>
+          </ng-template>
           <div>
             <p class="mb-0 fw-medium">{{ task.creator_name }}</p>
             <small class="text-muted">{{ task.creator_email }}</small>
@@ -103,8 +176,15 @@
       </div>
 
       <div class="mt-4">
-        <button class="btn btn-primary w-100">Mark as Complete</button>
+        <button
+          class="btn btn-primary w-100 rounded-4"
+          (click)="markAsComplete()"
+          [disabled]="task.status === 'done'"
+        >
+          Mark as Complete
+        </button>
       </div>
+
     </div>
   </div>
 </div>
