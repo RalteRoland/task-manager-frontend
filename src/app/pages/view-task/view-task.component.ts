@@ -98,16 +98,16 @@ export class ViewTaskComponent implements OnInit {
   }
 
   onCommentTyping(): void {
-  if (this.task.status === 'open') {
-    this.taskService.updateTask(this.task.id, { task: { status: 'in_progress' } }).subscribe({
-      next: (updated) => {
-        this.task.status = updated.status;
-        console.log('Status updated to in_progress due to typing comment.');
-      },
-      error: (err) => {
-        console.error('Failed to update status:', err);
-      }
-    });
+    if (this.task.status === 'open') {
+      this.taskService.updateTask(this.task.id, { task: { status: 'in_progress' } }).subscribe({
+        next: (updated) => {
+          this.task.status = updated.status;
+          console.log('Status updated to in_progress due to typing comment.');
+        },
+        error: (err) => {
+          console.error('Failed to update status:', err);
+        }
+      });
+    }
   }
-}
 }

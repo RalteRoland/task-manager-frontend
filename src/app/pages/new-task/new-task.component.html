@@ -134,16 +134,22 @@
                 <h3 class="section-title">Custom Properties</h3>
 
                 <!-- Priority -->
-                <div class="form-group">
-                    <label for="priority" class="form-label">Priority</label>
-                    <select id="priority" class="form-select">
-                        <option value="">Select</option>
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                        <option value="urgent">Urgent</option>
-                    </select>
+                <div class="mb-3">
+                  <label for="priority" class="form-label">Priority</label>
+                  <select
+                    id="priority"
+                    class="form-select"
+                    [(ngModel)]="task.priority"
+                    name="priority"
+                    required
+                  >
+                    <option value="" disabled>Select</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
                 </div>
+
 
                 <br>
 

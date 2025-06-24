@@ -16,11 +16,13 @@ export class NewTaskComponent implements OnInit {
     description: string;
     assigneeId: number | null;
     dueDate: string;
+    priority: string; // <-- Add this line
   } = {
     title: '',
     description: '',
     assigneeId: null,
     dueDate: '',
+    priority: '', // <-- This ensures "Select" is shown
   };
 
   attachments: File[] = [];
@@ -77,6 +79,7 @@ export class NewTaskComponent implements OnInit {
     formData.append('task[description]', this.task.description);
     formData.append('task[assignee_id]', this.task.assigneeId.toString());
     formData.append('task[due_date]', this.task.dueDate);
+    formData.append('task[priority]', this.task.priority); // <-- Added line
 
     this.subtasks.forEach((subtask, index) => {
       if (subtask.title.trim() !== '') {

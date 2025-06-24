@@ -5,8 +5,16 @@
   height: 10px;
   border-radius: 50%;
   display: inline-block;
+  justify-content: end;
 }
 
+.priority-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  justify-content: end;
+}
 
 .task-image {
   max-width: 412px;
@@ -24,12 +32,6 @@
 }
 
 
-.status-dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
 
 .bg-high {
   background-color: #dc3545; /* red */
