@@ -24,6 +24,16 @@ export class ViewTaskComponent implements OnInit {
     name: 'Anonymous'
   };
 
+    getReminderLabel(option: string): string {
+    switch (option) {
+      case '10_minutes': return '10 minutes before';
+      case '1_hour': return '1 hour before';
+      case '1_day': return '1 day before';
+      case '1_week': return '1 week before';
+      default: return '';
+    }
+  }
+
 
 
   ngOnInit(): void {

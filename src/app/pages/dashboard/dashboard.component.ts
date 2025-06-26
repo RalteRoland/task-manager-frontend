@@ -40,25 +40,20 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  goToTasks(): void {
-    // TODO: Navigate to tasks page when we create it
-    console.log('Navigate to tasks');
-    alert('Tasks page coming soon!');
-  }
 
   createTask(): void {
     this.router.navigate(['/tasks/new']);
   }
 
   getStatusLabel(status: string): string {
-  switch (status) {
-    case 'in_progress': return 'In Progress';
-    case 'done': return 'Completed';
-    case 'overdue': return 'Overdue';
-    case 'open': return 'Open';
-    default: return status;
+    switch (status) {
+      case 'in_progress': return 'In Progress';
+      case 'done': return 'Completed';
+      case 'overdue': return 'Overdue';
+      case 'open': return 'Open';
+      default: return status;
+    }
   }
-}
 
 
 }

@@ -41,10 +41,6 @@
         </ng-template>
       </div>
 
-
-
-
-
       <!-- Files (placeholder) -->
       <div class="mb-4">
         <h5 class="fw-semibold">Files</h5>
@@ -52,7 +48,6 @@
           <img *ngFor="let fileUrl of task.attachments" [src]="fileUrl" class="task-image" alt="Attachment">
         </div>
       </div>
-
 
       <!-- Comments (placeholder) -->
       <div class="mb-4">
@@ -123,7 +118,6 @@
         </p>
       </div>
 
-
       <div class="mb-3">
         <p class="text-muted mb-1">Due Date</p>
         <p class="fw-semibold">{{ task.due_date | date: 'dd MMMM, yyyy' }}</p>
@@ -131,7 +125,7 @@
 
       <div class="mb-3">
         <p class="text-muted mb-1">Reminders</p>
-        <p class="fw-semibold">1 day before</p>
+          <p class="fw-semibold" *ngIf="task.reminder_option">{{ getReminderLabel(task.reminder_option)}}</p>
       </div>
 
       <div class="mb-3">

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TaskService {
   private apiUrl = 'http://localhost:3000/tasks';
 
@@ -36,12 +37,10 @@ export class TaskService {
   }
 
 
-  // Updated method to handle FormData (for file uploads)
   createTask(formData: FormData): Observable<any> {
     return this.http.post(this.apiUrl, formData, {
       withCredentials: true
-      // Don't set Content-Type header - let browser set it automatically for FormData
-      // This ensures proper multipart/form-data boundary is set
+
     });
   }
 
@@ -64,7 +63,6 @@ export class TaskService {
   }
 
 
-  // Alternative method for tasks without files (JSON)
   createTaskWithoutFiles(taskData: any): Observable<any> {
     const payload = {
       task: {

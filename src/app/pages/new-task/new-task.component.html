@@ -124,10 +124,20 @@
             <div class="form-section">
               <h3 class="section-title">Reminders</h3>
               <label for="reminder" class="form-label">Set Reminder</label>
-              <select id="reminder" class="form-select">
-                <option value="">Select date and time</option>
+              <select
+                id="reminder"
+                class="form-select"
+                [(ngModel)]="task.reminderOption"
+                name="reminderOption"
+              >
+                <option value="">No Reminder</option>
+                <option value="10_minutes">10 minutes before</option>
+                <option value="1_hour">1 hour before</option>
+                <option value="1_day">1 day before</option>
+                <option value="1_week">1 week before</option>
               </select>
             </div>
+
 
             <!-- Custom Properties -->
             <div class="form-section">

@@ -8,6 +8,7 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './new-task.component.html',
   styleUrls: ['./new-task.component.css']
 })
+
 export class NewTaskComponent implements OnInit {
   users: any[] = [];
 
@@ -16,13 +17,15 @@ export class NewTaskComponent implements OnInit {
     description: string;
     assigneeId: number | null;
     dueDate: string;
-    priority: string; // <-- Add this line
+    priority: string;
+    reminderOption?: string;
   } = {
     title: '',
     description: '',
     assigneeId: null,
     dueDate: '',
-    priority: '', // <-- This ensures "Select" is shown
+    priority: '',
+    reminderOption: '',
   };
 
   attachments: File[] = [];
@@ -72,6 +75,8 @@ export class NewTaskComponent implements OnInit {
     if (!this.task.title || !this.task.description || !this.task.assigneeId || !this.task.dueDate) {
       alert('Please fill in all required fields.');
       return;
+
+
     }
 
     const formData = new FormData();
@@ -79,7 +84,7 @@ export class NewTaskComponent implements OnInit {
     formData.append('task[description]', this.task.description);
     formData.append('task[assignee_id]', this.task.assigneeId.toString());
     formData.append('task[due_date]', this.task.dueDate);
-    formData.append('task[priority]', this.task.priority); // <-- Added line
+    formData.append('task[priority]', this.task.priority);
 
     this.subtasks.forEach((subtask, index) => {
       if (subtask.title.trim() !== '') {
@@ -90,6 +95,32 @@ export class NewTaskComponent implements OnInit {
     this.attachments.forEach(file => {
       formData.append('task[attachments][]', file);
     });
+
+    if (this.task.reminderOption && this.task.dueDate) {
+      const due = new Date(this.task.dueDate);
+      let reminder: Date | null = null;
+
+      switch (this.task.reminderOption) {
+        case '10_minutes':
+          reminder = new Date(due.getTime() - 10 * 60 * 1000);
+          break;
+        case '1_hour':
+          reminder = new Date(due.getTime() - 60 * 60 * 1000);
+          break;
+        case '1_day':
+          reminder = new Date(due.getTime() - 24 * 60 * 60 * 1000);
+          break;
+        case '1_week':
+          reminder = new Date(due.getTime() - 7 * 24 * 60 * 60 * 1000);
+          break;
+      }
+
+      if (reminder) {
+        formData.append('task[reminder_option]', this.task.reminderOption);;
+      }
+    }
+
+
 
     this.taskService.createTask(formData).subscribe({
       next: (response: any) => {
