@@ -86,10 +86,10 @@
     </div>
 
     <!-- Right Side -->
-    <div class="col-lg-4">
-      <div class="mb-3">
-        <p class="text-muted mb-1">Status</p>
-        <p class="fw-semibold d-flex align-items-center justify-content-between">
+    <div class="col-lg-3">
+      <div class="mb-4">
+        <p class="fw-bold text-muted mb-1">Status</p>
+        <p class="fw-normal d-flex align-items-center justify-content-between">
           {{ task.status | titlecase }}
           <span
             class="status-dot"
@@ -104,9 +104,9 @@
       </div>
 
       <!-- Priority -->
-      <div class="mb-3">
-        <p class="text-muted mb-1">Priority</p>
-        <p class="fw-semibold d-flex align-items-center justify-content-between">
+      <div class="mb-4">
+        <p class="fw-bold text-muted mb-1">Priority</p>
+        <p class="fw-normal d-flex align-items-center justify-content-between">
           {{ task.priority | titlecase }}
           <span class="status-dot ms-2 priority-dot"
             [ngClass]="{
@@ -118,18 +118,18 @@
         </p>
       </div>
 
-      <div class="mb-3">
-        <p class="text-muted mb-1">Due Date</p>
-        <p class="fw-semibold">{{ task.due_date | date: 'dd MMMM, yyyy' }}</p>
+      <div class="mb-4">
+        <p class="fw-bold text-muted mb-1">Due Date</p>
+        <p class="fw-normal">{{ task.due_date | date: 'dd MMMM, yyyy' }}</p>
       </div>
 
-      <div class="mb-3">
-        <p class="text-muted mb-1">Reminders</p>
-          <p class="fw-semibold" *ngIf="task.reminder_option">{{ getReminderLabel(task.reminder_option)}}</p>
+      <div class="mb-4">
+        <p class="fw-bold text-muted mb-1">Reminders</p>
+          <p class="fw-normal" *ngIf="task.reminder_option">{{ getReminderLabel(task.reminder_option)}}</p>
       </div>
 
-      <div class="mb-3">
-        <p class="text-muted mb-1">Assignee</p>
+      <div class="mb-4">
+        <p class="fw-bold text-muted mb-1">Assignee</p>
         <div class="d-flex align-items-center">
           <ng-container *ngIf="user?.avatarUrl; else bootstrapAvatar">
           <img
@@ -156,8 +156,8 @@
         </div>
       </div>
 
-      <div class="mb-3">
-        <p class="text-muted mb-1">Created By</p>
+      <div class="mb-4">
+        <p class="fw-bold text-muted mb-1">Created By</p>
         <div class="d-flex align-items-center">
           <ng-container *ngIf="user?.avatarUrl; else bootstrapAvatar">
           <img
@@ -183,6 +183,12 @@
           </div>
         </div>
       </div>
+
+      <div class="mb-4">
+        <p class="text-muted mb-1"><strong>Created</strong></p>
+        <p>{{ task.created_at | date:'mediumDate' }}</p>
+      </div>
+
 
       <div class="mt-4">
         <button

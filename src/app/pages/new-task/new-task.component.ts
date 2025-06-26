@@ -19,6 +19,8 @@ export class NewTaskComponent implements OnInit {
     dueDate: string;
     priority: string;
     reminderOption?: string;
+    created_at?: string;
+
   } = {
     title: '',
     description: '',
@@ -26,6 +28,8 @@ export class NewTaskComponent implements OnInit {
     dueDate: '',
     priority: '',
     reminderOption: '',
+    created_at: '',
+
   };
 
   attachments: File[] = [];
