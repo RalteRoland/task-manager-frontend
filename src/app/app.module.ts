@@ -13,6 +13,7 @@ import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ViewTaskComponent } from './pages/view-task/view-task.component';
 import { EmployeesTaskListComponent } from './pages/employees-task-list/employees-task-list.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,8 @@ const routes: Routes = [
     NewTaskComponent,
     NavbarComponent,
     ViewTaskComponent,
-    EmployeesTaskListComponent
+    EmployeesTaskListComponent,
+    SignupComponent
 
   ],
   imports: [

@@ -19,9 +19,10 @@
 .task-image {
   max-width: 412px;
   max-height: 412px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 8px;
   object-fit: cover;
+  box-shadow: 2px 2px 8px rgb(151, 151, 151);
 }
 
 .subtask-lists {

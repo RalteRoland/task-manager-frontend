@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h3>Employees</h3>
+  <h1 class="fw-bold">Employees</h1>
   <br>
   <div class="table-rounded-wrapper">
     <table class="table table-hover">
@@ -14,7 +14,7 @@
       <tbody>
         <tr *ngFor="let emp of employees">
           <td>{{ emp.name }}</td>
-          <td>{{ emp.role }}</td>
+          <td>{{ emp.role.name }}</td> <!-- ✅ fixed -->
           <td>{{ emp.assigned_tasks_count }}</td>
           <td>
             <span class="badge" *ngIf="emp.status === 'Active'">{{ emp.status }}</span>

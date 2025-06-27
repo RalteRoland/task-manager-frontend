@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 })
 
 export class TaskService {
-  private apiUrl = 'http://localhost:3000/tasks';
+  private apiUrl = 'http://localhost:3000/api/tasks';
 
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<any> {
-  return this.http.get('http://localhost:3000/users', {
+  return this.http.get('http://localhost:3000/api/users', {
     withCredentials: true
   });
 }
@@ -31,7 +31,7 @@ export class TaskService {
   }
 
   getEmployees(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/employees', {
+    return this.http.get<any[]>('http://localhost:3000/api/users', {
       withCredentials: true
     });
   }
@@ -45,7 +45,7 @@ export class TaskService {
   }
 
   updateTask(id: number, data: any): Observable<any> {
-    return this.http.patch(`http://localhost:3000/tasks/${id}`, data, {
+    return this.http.patch(`http://localhost:3000/api/tasks/${id}`, data, {
       withCredentials: true
     });
   }
@@ -53,7 +53,7 @@ export class TaskService {
   updateSubtask(subtaskId: number, completed: boolean): Observable<any> {
     const payload = { subtask: { completed } };
 
-    return this.http.patch(`http://localhost:3000/subtasks/${subtaskId}`, payload, {
+    return this.http.patch(`http://localhost:3000/api/subtasks/${subtaskId}`, payload, {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
