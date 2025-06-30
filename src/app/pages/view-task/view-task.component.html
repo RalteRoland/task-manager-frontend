@@ -90,14 +90,14 @@
       <div class="mb-4">
         <p class="fw-bold text-muted mb-1">Status</p>
         <p class="fw-normal d-flex align-items-center justify-content-between">
-          {{ task.status | titlecase }}
+          {{ task.status?.name | titlecase }}
           <span
             class="status-dot"
             [ngClass]="{
-              'bg-success': task.status === 'done',
-              'bg-primary': task.status === 'in_progress',
-              'bg-warning': task.status === 'open',
-              'bg-danger': task.status === 'overdue'
+              'bg-success': task.status?.name === 'done',
+              'bg-primary': task.status?.name === 'in_progress',
+              'bg-warning': task.status?.name === 'open',
+              'bg-danger': task.status?.name === 'overdue'
             }"
           ></span>
         </p>
@@ -194,9 +194,10 @@
         <button
           class="btn btn-primary w-100 rounded-4"
           (click)="markAsComplete()"
-          [disabled]="task.status === 'done'"
+          [disabled]="task.status?.name === 'done' || isMarkingComplete"
         >
-          Mark as Complete
+          <span *ngIf="isMarkingComplete" class="spinner-border spinner-border-sm me-2" role="status"></span>
+          {{ isMarkingComplete ? 'Marking Complete...' : 'Mark as Complete' }}
         </button>
       </div>
 

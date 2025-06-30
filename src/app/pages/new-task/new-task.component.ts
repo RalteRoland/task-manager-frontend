@@ -79,8 +79,6 @@ export class NewTaskComponent implements OnInit {
     if (!this.task.title || !this.task.description || !this.task.assigneeId || !this.task.dueDate) {
       alert('Please fill in all required fields.');
       return;
-
-
     }
 
     const formData = new FormData();
@@ -89,6 +87,9 @@ export class NewTaskComponent implements OnInit {
     formData.append('task[assignee_id]', this.task.assigneeId.toString());
     formData.append('task[due_date]', this.task.dueDate);
     formData.append('task[priority]', this.task.priority);
+
+    // ✅ Add default status_id = 1 ("open")
+    formData.append('task[status_id]', '1');
 
     this.subtasks.forEach((subtask, index) => {
       if (subtask.title.trim() !== '') {
@@ -120,11 +121,9 @@ export class NewTaskComponent implements OnInit {
       }
 
       if (reminder) {
-        formData.append('task[reminder_option]', this.task.reminderOption);;
+        formData.append('task[reminder_option]', this.task.reminderOption);
       }
     }
-
-
 
     this.taskService.createTask(formData).subscribe({
       next: (response: any) => {
@@ -137,4 +136,5 @@ export class NewTaskComponent implements OnInit {
       }
     });
   }
+
 }

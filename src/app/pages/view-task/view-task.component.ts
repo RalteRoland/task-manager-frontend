@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class ViewTaskComponent implements OnInit {
   task: any;
   newComment: string = '';
+  isMarkingComplete = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +25,7 @@ export class ViewTaskComponent implements OnInit {
     name: 'Anonymous'
   };
 
-    getReminderLabel(option: string): string {
+  getReminderLabel(option: string): string {
     switch (option) {
       case '10_minutes': return '10 minutes before';
       case '1_hour': return '1 hour before';
@@ -33,8 +34,6 @@ export class ViewTaskComponent implements OnInit {
       default: return '';
     }
   }
-
-
 
   ngOnInit(): void {
     const taskId = this.route.snapshot.paramMap.get('id');
@@ -52,32 +51,38 @@ export class ViewTaskComponent implements OnInit {
   }
 
   markAsComplete(): void {
-    this.taskService.markTaskAsComplete(this.task.id).subscribe({
-      next: updated => {
-        if (updated.status === 'done') {
+    this.isMarkingComplete = true;
+    this.taskService.markAsComplete(this.task.id).subscribe({
+      next: (updated: any) => {
+        if (updated?.status?.name === 'done') {
           this.task.status = updated.status;
-          console.log('Task marked as complete');
+          this.task.display_status = updated.display_status;
+          console.log('Task marked as complete.');
         } else {
           alert('Status not updated to done.');
         }
+        this.isMarkingComplete = false;
       },
-      error: err => {
+      error: (err) => {
         console.error('Failed to mark task as complete', err);
         alert('Failed to complete the task.');
+        this.isMarkingComplete = false;
       }
     });
   }
+
+
 
   updateSubtaskCompletion(subtask: any): void {
     this.taskService.updateSubtask(subtask.id, subtask.completed).subscribe({
       next: () => {
         console.log(`Subtask "${subtask.title}" marked as ${subtask.completed ? 'complete' : 'incomplete'}`);
 
-        // Optional: Change task status to "in_progress" if currently "open"
-        if (this.task.status === 'open') {
-          this.taskService.updateTask(this.task.id, { task: { status: 'in_progress' } }).subscribe({
+        if (this.task.status?.name === 'open') {
+          this.taskService.updateTask(this.task.id, { task: { status_id: 2 } }).subscribe({
             next: updated => {
               this.task.status = updated.status;
+              this.task.display_status = updated.display_status; // 👈 Add this
               console.log('Task status updated to in_progress due to subtask activity.');
             }
           });
@@ -108,10 +113,11 @@ export class ViewTaskComponent implements OnInit {
   }
 
   onCommentTyping(): void {
-    if (this.task.status === 'open') {
-      this.taskService.updateTask(this.task.id, { task: { status: 'in_progress' } }).subscribe({
+    if (this.task.status?.name === 'open') {
+      this.taskService.updateTask(this.task.id, { task: { status_id: 2 } }).subscribe({
         next: (updated) => {
           this.task.status = updated.status;
+          this.task.display_status = updated.display_status;
           console.log('Status updated to in_progress due to typing comment.');
         },
         error: (err) => {

@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 
 export class TaskService {
   private apiUrl = 'http://localhost:3000/api/tasks';
+  task: any;
+  taskService: any;
 
   constructor(private http: HttpClient) { }
 
@@ -83,11 +85,11 @@ export class TaskService {
     });
   }
 
-  markTaskAsComplete(taskId: number): Observable<any> {
-    return this.http.put(
-      `${this.apiUrl}/${taskId}`,
-      { task: { status: 'done' } },
-      { withCredentials: true }
-    );
+  markAsComplete(taskId: number) {
+    return this.http.patch<any>(`http://localhost:3000/api/tasks/${taskId}/mark_complete`, {}, { withCredentials: true });
   }
+
+
+
+
 }
