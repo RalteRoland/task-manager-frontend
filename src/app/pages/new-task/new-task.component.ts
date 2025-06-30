@@ -11,25 +11,25 @@ import { TaskService } from '../../services/task.service';
 
 export class NewTaskComponent implements OnInit {
   users: any[] = [];
+  priorities: any[] = [];
+
 
   task: {
     title: string;
     description: string;
     assigneeId: number | null;
     dueDate: string;
-    priority: string;
+    priorityId: number | null;  // 👈 updated
     reminderOption?: string;
     created_at?: string;
-
   } = {
     title: '',
     description: '',
     assigneeId: null,
     dueDate: '',
-    priority: '',
+    priorityId: null,  // 👈 updated
     reminderOption: '',
-    created_at: '',
-
+    created_at: ''
   };
 
   attachments: File[] = [];
@@ -50,7 +50,17 @@ export class NewTaskComponent implements OnInit {
         alert('Could not load users.');
       }
     });
+
+    this.taskService.getPriorities().subscribe({
+      next: (data) => {
+        this.priorities = data;
+      },
+      error: (err) => {
+        console.error('Failed to load priorities', err);
+      }
+    });
   }
+
 
   addSubtask() {
     this.subtasks.push({ title: '', included: true });
@@ -86,7 +96,11 @@ export class NewTaskComponent implements OnInit {
     formData.append('task[description]', this.task.description);
     formData.append('task[assignee_id]', this.task.assigneeId.toString());
     formData.append('task[due_date]', this.task.dueDate);
-    formData.append('task[priority]', this.task.priority);
+    if (this.task.priorityId) {
+      formData.append('task[priority_id]', this.task.priorityId.toString());
+    }
+
+
 
     // ✅ Add default status_id = 1 ("open")
     formData.append('task[status_id]', '1');

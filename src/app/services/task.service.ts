@@ -13,11 +13,16 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
+  getPriorities(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:3000/api/priorities', { withCredentials: true });
+  }
+
+
   getUsers(): Observable<any> {
-  return this.http.get('http://localhost:3000/api/users', {
-    withCredentials: true
-  });
-}
+    return this.http.get('http://localhost:3000/api/users', {
+      withCredentials: true
+    });
+  }
 
 
   getTasks(): Observable<any> {

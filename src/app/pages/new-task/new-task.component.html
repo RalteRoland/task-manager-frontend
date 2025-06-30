@@ -149,17 +149,13 @@
                   <select
                     id="priority"
                     class="form-select"
-                    [(ngModel)]="task.priority"
-                    name="priority"
+                    [(ngModel)]="task.priorityId"
+                    name="priorityId"
                     required
                   >
-                    <option value="" disabled>Select</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                    <option *ngFor="let p of priorities" [value]="p.id">{{ p.name }}</option>
                   </select>
                 </div>
-
 
                 <br>
 
