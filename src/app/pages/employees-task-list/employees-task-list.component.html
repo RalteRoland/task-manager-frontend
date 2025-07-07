@@ -14,10 +14,15 @@
       <tbody>
         <tr *ngFor="let emp of employees">
           <td>{{ emp.name }}</td>
-          <td>{{ emp.role.name }}</td> <!-- ✅ fixed -->
+          <td>{{ emp.role.name }}</td> 
           <td>{{ emp.assigned_tasks_count }}</td>
           <td>
-            <span class="badge" *ngIf="emp.status === 'Active'">{{ emp.status }}</span>
+            <span
+              class="badge"
+              [ngClass]="emp.status === 'Active' ? 'active-badge' : 'inactive-badge'"
+            >
+              {{ emp.status }}
+            </span>
           </td>
         </tr>
       </tbody>

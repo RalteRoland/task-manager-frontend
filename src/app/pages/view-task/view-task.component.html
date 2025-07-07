@@ -42,16 +42,37 @@
       </div>
 
       <!-- Files (placeholder) -->
-      <div class="mb-4">
-        <h5 class="fw-semibold">Files</h5>
-        <div class="d-flex gap-3 flex-wrap">
-          <img *ngFor="let fileUrl of task.attachments" [src]="fileUrl" class="task-image" alt="Attachment">
-        </div>
-      </div>
-
-      <!-- Comments (placeholder) -->
+      <!-- Comments Section -->
       <div class="mb-4">
         <h5 class="fw-semibold">Comments</h5>
+
+        <!-- Scrollable Comments Container -->
+        <div class="mt-3 ps-5 comment-scroll-container" [ngClass]="{'scroll-enabled': visibleCount > 5,'scroll-none': visibleCount <= 5}">
+          <div *ngFor="let comment of loadedComments.slice(0, visibleCount)">
+            <div class="comment-details d-flex align-items-center gap-2 mb-1">
+              <p class="comment-author mb-0 fw-semibold">{{ comment.author_name }}</p>
+              <p class="comment-timestamp mb-0 text-muted small">· {{ comment.time_ago }}</p>
+              <button
+                (click)="deleteComment(comment.id)"
+                class="btn btn-sm btn-link text-danger p-0 ms-2 comment-delete-btn"
+                title="Delete"
+              >🗑️</button>
+            </div>
+            <p class="comment-content mb-3">{{ comment.content }}</p>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div *ngIf="visibleCount < loadedComments.length" class="text-center my-2 ps-5">
+          <button
+            class="btn btn-link btn-sm text-decoration-none text-muted"
+            (click)="loadMore()"
+          >
+            Load more comments
+          </button>
+        </div>
+
+        <!-- New Comment Textarea -->
         <div class="d-flex align-items-start p-3 border rounded">
           <ng-container *ngIf="user?.avatarUrl; else bootstrapAvatar">
             <img
@@ -72,14 +93,13 @@
             </div>
           </ng-template>
 
-          <!-- Comment Textarea -->
           <textarea
             class="form-control border-0 shadow-none"
             rows="2"
             placeholder="Add a comment..."
             style="resize: none;"
             [(ngModel)]="newComment"
-            (input)="onCommentTyping()"
+            (keydown)="handleKeydown($event)"
           ></textarea>
         </div>
       </div>

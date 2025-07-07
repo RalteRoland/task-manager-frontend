@@ -25,6 +25,44 @@
   box-shadow: 2px 2px 8px rgb(151, 151, 151);
 }
 
+.comment-details{
+  display: flex;
+  gap: 10px;
+}
+
+.comment-author{
+  font-weight: 700;
+}
+
+.comment-timestamp{
+  color: gray;
+}
+
+.comment-delete-btn:hover {
+  background-color: #e4e4e4;
+  color: #dc3545;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.comment-scroll-container {
+  max-height: none;
+  overflow-y: visible;
+}
+
+.comment-scroll-container.scroll-enabled {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.comment-scroll-container.scroll-none {
+  max-height: none;
+  overflow: visible;
+}
+
+
+
+
 .subtask-lists {
   justify-content: start;
   padding: 0;
